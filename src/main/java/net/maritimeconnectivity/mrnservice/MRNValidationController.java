@@ -25,6 +25,11 @@ public class MRNValidationController  {
         return mrnValidationService.getMrnMask(input.nameSpace, input.organizationMrn);
     }
 
+    @RequestMapping(value = "check/", method=RequestMethod.POST) //, produces = MediaType.TEXT_PLAIN_VALUE)
+    public boolean isMRNCorrect(@RequestBody String mrnString){
+        return mrnValidationService.checkMRNValidity(mrnString);
+    }
+
     /*
     @RequestMapping("/articles")
     public List<Article> getAllArticles(){

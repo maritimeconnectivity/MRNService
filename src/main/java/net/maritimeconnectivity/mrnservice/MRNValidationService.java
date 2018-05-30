@@ -54,4 +54,40 @@ public class MRNValidationService {
         else
             return organizationMrn;
     }
+
+    private boolean checkType(String typeString){
+        if(typeString.equals(MRN.Type.org.toString()) ||
+                typeString.equals(MRN.Type.design.toString()) ||
+                typeString.equals(MRN.Type.device.toString()) ||
+                typeString.equals(MRN.Type.user.toString()) ||
+                typeString.equals(MRN.Type.vessel.toString()) ||
+                typeString.equals(MRN.Type.specification.toString()))
+            return true;
+        else
+            return false;
+    }
+
+    //////////////////// not implemented yet ////////////////////
+    private boolean checkOrganization(String orgString){
+        return true;
+    }
+    /////////////////////////////////////////////////////////////
+
+    public boolean checkMRNValidity(String mrnString){
+       String[] tokens = mrnString.split(":");
+       if(tokens.length<=4)
+           return false;
+       if(!tokens[0].equals("urn"))
+           return false;
+       if(!tokens[1].equals("mrn"))
+           return false;
+
+       if(!tokens[2].equals("mcl"))
+           return false;
+       if(!checkType(tokens[3]))
+           return false;
+       if(!checkOrganization(tokens[4]))
+           return false;
+       return true;
+    }
 }
