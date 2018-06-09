@@ -8,15 +8,17 @@ import java.util.List;
 @Service
 public class MRNValidationService {
 
+    String mrnBase = "urn:mrn:mcl:";
+
     public String getMrnMask(String nameSpace, String organizationMrn) {
         //e.g. "urn:mrn:mcl:<namespace>:<orgShortName>:"
         //if nameSpace=org then organizationMrn is not provided
 
         String orgShortName = getOrgShortName(organizationMrn);
         if (orgShortName.isEmpty())
-            return "urn:mrn:mcl:" + nameSpace + ":";
+            return mrnBase + nameSpace + ":";
         else
-            return "urn:mrn:mcl:" + nameSpace + ":" + orgShortName + ":";
+            return mrnBase + nameSpace + ":" + orgShortName + ":";
 
     }
 
@@ -30,9 +32,9 @@ public class MRNValidationService {
 
         String orgShortName = getOrgShortName(organizationMrn);
         if (orgShortName.isEmpty())
-            return "urn:mrn:mcl:"+ getValidatedType(type) + ":" + nameSpace + ":";
+            return mrnBase+ getValidatedType(type) + ":" + nameSpace + ":";
         else
-            return "urn:mrn:mcl:"+ getValidatedType(type) + ":" + nameSpace + ":" + orgShortName + ":";
+            return mrnBase+ getValidatedType(type) + ":" + nameSpace + ":" + orgShortName + ":";
 
     }
 
@@ -99,13 +101,14 @@ public class MRNValidationService {
            return false;
        if(!tokens[1].equals("mrn"))
            return false;
-
        if(!tokens[2].equals("mcl"))
            return false;
+       /*
        if(!checkType(tokens[3]))
            return false;
        if(!checkOrganization(tokens[4]))
            return false;
+           */
        return true;
     }
 }
