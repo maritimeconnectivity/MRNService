@@ -51,8 +51,22 @@ public class MRNValidationService {
     public String getOrgShortName(String organizationMrn){
         if( organizationMrn.isEmpty())
             return "";
-        else
-            return organizationMrn;
+        else{
+            String[] tokens = stripMRN(organizationMrn).split(":");
+            int orgIdx = -1;
+            for(int i=0; i< tokens.length ; i++)
+            {
+                if(tokens[i].equals("org")) {
+                    orgIdx = i + 1;
+                    break;
+                }
+            }
+            if(orgIdx>=0 && orgIdx < tokens.length)
+                return tokens[orgIdx];
+            else
+                return "";
+        }
+
     }
 
     private boolean checkType(String typeString){
@@ -73,8 +87,12 @@ public class MRNValidationService {
     }
     /////////////////////////////////////////////////////////////
 
+    private String stripMRN(String mrnString){
+        return mrnString.replaceAll("^\"+", "").replaceAll("\"+$", "");
+    }
+
     public boolean checkMRNValidity(String mrnString){
-       String[] tokens = mrnString.split(":");
+       String[] tokens = stripMRN(mrnString).split(":");
        if(tokens.length<=4)
            return false;
        if(!tokens[0].equals("urn"))
