@@ -7,7 +7,7 @@ public class MRN {
         user,
         vessel,
         specification,
-        design
+        mms
     }
 
     public String instance;

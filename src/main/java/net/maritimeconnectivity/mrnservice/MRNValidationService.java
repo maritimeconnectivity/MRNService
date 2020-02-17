@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class MRNValidationService {
 
-    String mrnBase = "urn:mrn:mcl:";
+    String mrnBase = "urn:mrn:mcp:";
 
     public String getMrnMask(String nameSpace, String organizationMrn) {
         //e.g. "urn:mrn:mcl:<namespace>:<orgShortName>:"
@@ -73,7 +73,7 @@ public class MRNValidationService {
 
     private boolean checkType(String typeString){
         if(typeString.equals(MRN.Type.org.toString()) ||
-                typeString.equals(MRN.Type.design.toString()) ||
+                typeString.equals(MRN.Type.mms.toString()) ||
                 typeString.equals(MRN.Type.device.toString()) ||
                 typeString.equals(MRN.Type.user.toString()) ||
                 typeString.equals(MRN.Type.vessel.toString()) ||
