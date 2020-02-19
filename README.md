@@ -29,7 +29,7 @@ Then you will get,
     }
   
 ### When you have your specific MRN syntax
-Assuming you are deploying this on your local machine, you can call POST request with a json data body, e.g.,
+Assuming you are deploying this on your local machine, you can call POST request to 'localhost:8080/validate/' with a json data body, e.g.,
 
     {
 	  "mrn":"urn:mrn:mcp:user:granpa:thomas",
