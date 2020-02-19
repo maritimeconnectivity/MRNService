@@ -2,7 +2,7 @@
 A service for MRN validation
 
 ## What is MRN?
-Maritime Resource Name (MRN) is a naming scheme under Uniform Resource Name (URN) that can uniquely identify any maritime resource on a global scale, hosted by IALA.
+[**Maritime Resource Name (MRN)**](https://www.iala-aism.org/technical/data-modelling/mrn/)is a naming scheme under [Uniform Resource Name (URN)](https://en.wikipedia.org/wiki/Uniform_Resource_Name) that can uniquely identify any maritime resource on a global scale, hosted by [IALA](https://www.iala-aism.org/).
 This implementation is based on the version 1 of MRN proposed by Kasper Nielsen. (https://www.iana.org/assignments/urn-formal/mrn)
 
 ## How to use
@@ -10,7 +10,7 @@ Assuming you are deploying this on your local machine, you can call Get request 
 
     localhost:8080/validate?mrn=urn:mrn:mcp:user:givemedriverslicense:jinki
 
-Then it will check whether it follows the MRN syntax or not and return the validation result as json format.
+Then it will check whether it follows the MRN syntax (ver.1) or not and return the validation result as json format.
 
     {
       "result": true,
@@ -36,7 +36,7 @@ Assuming you are deploying this on your local machine, you can call Post request
   	"regex":"^[Uu][Rr][Nn]\\:[Mm][Rr][Nn]\\:[Mm][Cc][Pp]\\:([Dd][Ee][Vv][Ii][Cc][Ee]|[Oo][Rr][Gg]|[Uu][Ss][Ee][Rr]|[Vv][Ee][Ss][Ss][Ee][Ll]|[Ss][Ee][Rr][Vv][Ii][Cc][Ee])\\:([A-Za-z0-9]([A-Za-z0-9]|\\-){0,20}[A-Za-z0-9])\\:((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)|\\/)*)$"
     }
 
-which checks the MRN follows MCP MRN syntax. This case you will get,
+which checks the MRN follows [Maritime Connectivity Platform (MCP)](https://maritimeconnectivity.net/) MRN syntax. This case you will get,
 
     {
       "result": true,
@@ -44,8 +44,8 @@ which checks the MRN follows MCP MRN syntax. This case you will get,
     }
 
 ## Prerequisite
-The MRN validation of this implementation is based on the regular expression (REGEX), which can be obtained from a MRN syntax through several steps.
-In the example with the official MRN syntax,
+The MRN validation of this implementation is based on the [regular expression (REGEX)](https://en.wikipedia.org/wiki/Regular_expression), which can be obtained from a MRN syntax through several steps.
+In the example with [the official MRN syntax](https://www.iana.org/assignments/urn-formal/mrn),
 
       <MRN>   ::= "urn" ":" "mrn" ":" <OID> ":" <OSS>
                   [ rq-components ]
@@ -58,7 +58,7 @@ In the example with the official MRN syntax,
       <OSNS>  ::= pchar *(pchar / "/") ; Organization-specific 
                   namespace string
                   
-This could be converted to the pure Augmented Backus–Naur form (ABNF) as below:
+This could be converted to the pure [Augmented Backus–Naur form (ABNF)](https://en.wikipedia.org/wiki/Augmented_Backus%E2%80%93Naur_form) as below:
 
     mrn = "urn" ":" "mrn" ":" oid ":" oss [rq-components] [ "#" f-component ]
     oid = (alphanum) 0*20((alphanum) / "-") (alphanum) ; Organization ID
@@ -95,7 +95,7 @@ then run with
     java -jar target/mrnValidation-0.7.0-SNAPSHOT.war
 
 ## Motivation
-MRN validation service has been motivated for MRNs in Maritime Connectivity Platform (MCP).
+MRN validation service has been motivated for MRNs in [Maritime Connectivity Platform (MCP)](https://maritimeconnectivity.net/).
 
 ## Future implementation
 We will implement 'generate' api with supports of specific MRN syntax in near future.
