@@ -4,56 +4,36 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@RequestMapping(path = "/")
 public class MRNValidationController  {
-
     @Autowired
     private MRNValidationService mrnValidationService;
 
-
-    @RequestMapping(value = "validate/", method=RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String isValid(){
-        return Boolean.TRUE.toString();
+    @GetMapping(path="/validate", produces = "application/json")
+    public Result validateMRN(@RequestParam(value = "mrn") String mrn)
+    {
+        return mrnValidationService.getResult(mrn, "");
     }
 
-    @RequestMapping(value = "validate/", method=RequestMethod.POST) //, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String validateMRN(@RequestBody MRNInput input){
-        return mrnValidationService.getMrnMask(input.nameSpace, input.organizationMrn);
-    }
-
-    @RequestMapping(value = "check/", method=RequestMethod.POST) //, produces = MediaType.TEXT_PLAIN_VALUE)
-    public boolean isMRNCorrect(@RequestBody String mrnString){
-        return mrnValidationService.checkMRNValidity(mrnString);
+    @PostMapping(path="/validate", consumes = "application/json", produces = "application/json")
+    public Result validateMRNWithScheme(@RequestBody Map<String, String> payload) throws Exception
+    {
+        return mrnValidationService.getResult(payload.get("mrn"), payload.get("regex"));
     }
 
     /*
-    @RequestMapping("/articles")
-    public List<Article> getAllArticles(){
-        return articleService.getAllArticles();
+    @PostMapping(path="/generate", consumes = "application/json", produces = "application/json")
+    public Result generateMRNWithScheme(@RequestBody Map<String, String> payload) throws Exception
+    {
+        return mrnValidationService.generate(payload);
     }
 
-    @RequestMapping("/articles/{id}")
-    public Article getArticle(@PathVariable String id){
-        return articleService.getArticle(id);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/articles")
-    public void addArticle(@RequestBody Article article){
-        articleService.addArticle(article);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/articles/{id}")
-    public void updateArticle(@RequestBody Article article, @PathVariable String id){
-        articleService.updateArticle(article, id);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/articles/{id}")
-    public void deleteArticle(@PathVariable String id){
-        articleService.deleteArticle(id);
-    }
-    */
+     */
 }
