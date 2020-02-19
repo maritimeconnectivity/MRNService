@@ -6,7 +6,7 @@ A service for MRN validation
 This implementation is based on the version 1 of MRN proposed by Kasper Nielsen. (https://www.iana.org/assignments/urn-formal/mrn)
 
 ## How to use
-Assuming you are deploying this on your local machine, you can call Get request as follows:
+Assuming you are deploying this on your local machine, you can call GET request as follows:
 
     localhost:8080/validate?mrn=urn:mrn:mcp:user:givemedriverslicense:jinki
 
@@ -17,7 +17,7 @@ Then it will check whether it follows the MRN syntax (ver.1) or not and return t
       "mrn": "urn:mrn:mcp:user:givemedriverslicense:jinki"
     }
   
-But with wrong scheme like having 'm' for <OID>,
+In the example with incorrect MRN scheme like having 'm' for OID,
 
     localhost:8080/validate?mrn=urn:mrn:m:user:walkingwikipedia:oliver
 
@@ -29,11 +29,11 @@ Then you will get,
     }
   
 ### When you have your specific MRN syntax
-Assuming you are deploying this on your local machine, you can call Post request with a json data body, e.g.,
+Assuming you are deploying this on your local machine, you can call POST request with a json data body, e.g.,
 
     {
 	  "mrn":"urn:mrn:mcp:user:granpa:thomas",
-  	"regex":"^[Uu][Rr][Nn]\\:[Mm][Rr][Nn]\\:[Mm][Cc][Pp]\\:([Dd][Ee][Vv][Ii][Cc][Ee]|[Oo][Rr][Gg]|[Uu][Ss][Ee][Rr]|[Vv][Ee][Ss][Ss][Ee][Ll]|[Ss][Ee][Rr][Vv][Ii][Cc][Ee])\\:([A-Za-z0-9]([A-Za-z0-9]|\\-){0,20}[A-Za-z0-9])\\:((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)|\\/)*)$"
+  	  "regex":"^[Uu][Rr][Nn]\\:[Mm][Rr][Nn]\\:[Mm][Cc][Pp]\\:([Dd][Ee][Vv][Ii][Cc][Ee]|[Oo][Rr][Gg]|[Uu][Ss][Ee][Rr]|[Vv][Ee][Ss][Ss][Ee][Ll]|[Ss][Ee][Rr][Vv][Ii][Cc][Ee])\\:([A-Za-z0-9]([A-Za-z0-9]|\\-){0,20}[A-Za-z0-9])\\:((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)|\\/)*)$"
     }
 
 which checks the MRN follows [Maritime Connectivity Platform (MCP)](https://maritimeconnectivity.net/) MRN syntax. This case you will get,
@@ -50,13 +50,10 @@ In the example with [the official MRN syntax](https://www.iana.org/assignments/u
       <MRN>   ::= "urn" ":" "mrn" ":" <OID> ":" <OSS>
                   [ rq-components ]
                   [ "#" f-component ]
-      <OID>   ::= (alphanum) 0*20(alphanum / "-") (alphanum) ; 
-                  Organization ID
+      <OID>   ::= (alphanum) 0*20(alphanum / "-") (alphanum) ; Organization ID
       <OSS>   ::= <OSNID> ":" <OSNS> ; Organization-specific string
-      <OSNID> ::= (alphanum) 0*32(alphanum / "-") (alphanum) 
-                  ; Organization-specific namespace ID
-      <OSNS>  ::= pchar *(pchar / "/") ; Organization-specific 
-                  namespace string
+      <OSNID> ::= (alphanum) 0*32(alphanum / "-") (alphanum) ; Organization-specific namespace ID
+      <OSNS>  ::= pchar *(pchar / "/") ; Organization-specific namespace string
                   
 This could be converted to the pure [Augmented Backus–Naur form (ABNF)](https://en.wikipedia.org/wiki/Augmented_Backus%E2%80%93Naur_form) as below:
 
