@@ -36,7 +36,7 @@ Assuming you are deploying this on your local machine, you can call POST request
   	  "regex":"^[Uu][Rr][Nn]\\:[Mm][Rr][Nn]\\:[Mm][Cc][Pp]\\:([Dd][Ee][Vv][Ii][Cc][Ee]|[Oo][Rr][Gg]|[Uu][Ss][Ee][Rr]|[Vv][Ee][Ss][Ss][Ee][Ll]|[Ss][Ee][Rr][Vv][Ii][Cc][Ee])\\:([A-Za-z0-9]([A-Za-z0-9]|\\-){0,20}[A-Za-z0-9])\\:((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\\!|\\$|&|'|\\(|\\)|\\*|\\+|,|;|\\=)|\\:|@)|\\/)*)$"
     }
 
-which validate the MRN with the given manual MRN syntax (REGEX) you will get,
+which validate the MRN with the given manual MRN syntax (REGEX format) and then you will get,
 
     {
       "result": true,
@@ -73,13 +73,13 @@ This could be converted to the pure [Augmented Backus–Naur form (ABNF)](https:
     pct-encoded = "%" HEXDIG HEXDIG ; rfc3986
     sub-delims = "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "=" ; rfc3986
 
-You can practice the generation of valid ABNF and corresponding REGEX by online tools such as https://abnf.msweet.org/.
+You can practice the generation of valid ABNF and corresponding REGEX by online tools, for example: https://abnf.msweet.org/.
 
-The corresponding raw REGEX of MRN syntax is:
+The corresponding raw REGEX of the MRN syntax is:
 
     mrn: ^[Uu][Rr][Nn]\:[Mm][Rr][Nn]\:([A-Za-z0-9]([A-Za-z0-9]|\-){0,20}[A-Za-z0-9])\:([A-Za-z0-9][-A-Za-z0-9]{0,20}[A-Za-z0-9])\:((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)|/)*)((\?\+((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)|/|\?)*))?(\?\=((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)|/|\?)*))?)?(#(((([-A-Z._a-z0-9]|~)|%[0-9A-Fa-f][0-9A-Fa-f]|(\!|\$|&|'|\(|\)|\*|\+|,|;|\=)|\:|@)|/|\?)*))?$
 
-You can also practice the REGEX you made and MRN following it by online tools such as https://regex101.com/.
+You can also practice with REGEX and the MRN complying with it by online tools, for example: https://regex101.com/.
 
 
 ## Local deployment
