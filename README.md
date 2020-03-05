@@ -17,7 +17,7 @@ Then it will check whether it follows the MRN syntax (ver.1) or not and return t
       "mrn": "urn:mrn:mcp:user:givemedriverslicense:jinki"
     }
   
-In the example with incorrect MRN scheme like having 'm' for OID,
+In the example with incorrect MRN scheme like having one character 'm' for OID,
 
     localhost:8080/validate?mrn=urn:mrn:m:user:walkingwikipedia:oliver
 
