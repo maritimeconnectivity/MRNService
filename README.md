@@ -94,5 +94,3 @@ then run with
 ## Motivation
 MRN validation service has been motivated for MRNs in [Maritime Connectivity Platform (MCP)](https://maritimeconnectivity.net/).
 
-## Future implementation
-We will implement 'generate' api with supports of specific MRN syntax in near future.
